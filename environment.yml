@@ -1,0 +1,11 @@
+name: cse-547
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - ipykernel
+  - pyspark
+  - pandas
+  - numpy
+  - matplotlib
+  - findspark
