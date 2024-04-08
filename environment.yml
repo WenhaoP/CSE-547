@@ -4,8 +4,11 @@ channels:
 dependencies:
   - python
   - ipykernel
-  - pyspark
   - pandas
   - numpy
   - matplotlib
-  - findspark
+  - pip
+  - pip:
+    - pyspark
+    - pyarrow
+    - findspark
