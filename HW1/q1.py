@@ -47,7 +47,7 @@ def main():
     # find the recommendations
     window_spec = Window.partitionBy("User").orderBy(F.desc("Num of Mutual Friends"), F.asc("Unfriend"))
     mutual_friend = mutual_friend.withColumn("rank", F.row_number().over(window_spec))
-    mutual_friend = mutual_friend.filter(mutual_friend["rank"] <= 10)
+    mutual_friend = mutual_friend.filter((mutual_friend["rank"] <= 10) & (mutual_friend["Num of Mutual Friends"] > 0))
     mutual_friend = mutual_friend.select(["User", "Unfriend"]).groupby("User").agg(F.collect_list("Unfriend").alias("Recommendations"))
     final = mutual_friend.union(no_friend).sort(F.asc("user"))
     print(final.filter((final["User"] == 924) | 
