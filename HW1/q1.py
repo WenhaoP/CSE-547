@@ -50,7 +50,7 @@ def main():
     mutual_friend = mutual_friend.filter((mutual_friend["rank"] <= 10) & (mutual_friend["Num of Mutual Friends"] > 0))
     mutual_friend = mutual_friend.select(["User", "Unfriend"]).groupby("User").agg(F.collect_list("Unfriend").alias("Recommendations"))
     final = mutual_friend.union(no_friend).sort(F.asc("user"))
-    print(final.filter((final["User"] == 924) | 
+    final.filter((final["User"] == 924) | 
              (final["User"] == 8941) | 
              (final["User"] == 8942) |
              (final["User"] == 9019) |
@@ -59,7 +59,7 @@ def main():
              (final["User"] == 9022) | 
              (final["User"] == 9990) |
              (final["User"] == 9992) |
-             (final["User"] == 9993)).take(10))
+             (final["User"] == 9993)).show(10, False)
     
     spark.stop()
 
